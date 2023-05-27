@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"menu/app/services"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,7 +18,12 @@ func NewPostresController(postresService *services.PostresService) *PostresContr
 }
 
 func (pc PostresController) GetPostres(c *gin.Context) {
-	// Implementar
+	postres, err := pc.PostresService.GetPostres()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, postres)
 }
 func (pc PostresController) AddDish(c *gin.Context) {
 	// Implementar

@@ -2,6 +2,7 @@ package database
 
 import (
 	"database/sql"
+	"menu/app/models"
 	// Importa otros paquetes necesarios
 )
 
@@ -15,5 +16,23 @@ func NewEntradasDatabase(db *sql.DB) *EntradasDatabase {
 	}
 }
 
-// Funciones para interactuar con la tabla "menu" en la base de datos
-// Ejemplo: crear, obtener, eliminar platos del menú
+func (ed EntradasDatabase) GetEntradas() ([]models.Entradas, error) {
+	var entradas []models.Entradas
+
+	rows, err := ed.DB.Query("SELECT * FROM entradas WHERE disponible = 1")
+	if err != nil {
+		return entradas, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var entrada models.Entradas
+		err = rows.Scan(&entrada.ID, &entrada.Nombre, &entrada.Precio, &entrada.Disponible, &entrada.Descripcion)
+		if err != nil {
+			return entradas, err
+		}
+		entradas = append(entradas, entrada)
+	}
+
+	return entradas, nil
+}

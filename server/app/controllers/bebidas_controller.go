@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"menu/app/services"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -15,8 +16,13 @@ func NewBebidasController(bebidasService *services.BebidasService) *BebidasContr
 		BebidasService: bebidasService,
 	}
 }
-func (bc BebidasController) GetBebidas(c *gin.Context) {
-	// Implementar
+func (bc *BebidasController) GetBebidas(c *gin.Context) {
+	bebidas, err := bc.BebidasService.GetBebidas()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, bebidas)
 }
 func (bc BebidasController) AddDish(c *gin.Context) {
 	// Implementar

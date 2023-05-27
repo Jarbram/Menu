@@ -7,9 +7,9 @@ import (
 )
 
 func SetupEntradasRoutes(r *gin.Engine, entradasController *controllers.EntradasController) {
-	entradasRoutes := r.Group("/menu")
+	entradasRoutes := r.Group("/entradas")
 	{
-		entradasRoutes.GET("/", entradasController.GetMenu)
+		entradasRoutes.GET("/", entradasController.GetEntradas)
 		entradasRoutes.POST("/add-dish", entradasController.AddDish)
 		entradasRoutes.DELETE("/delete-dish/:id", entradasController.DeleteDish)
 		// ... otras rutas relacionadas con el menú

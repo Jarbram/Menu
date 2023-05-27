@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"menu/app/services"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -16,9 +17,15 @@ func NewEntradasController(entradasService *services.EntradasService) *EntradasC
 	}
 }
 
-func (ec EntradasController) GetMenu(c *gin.Context) {
-	// Implementar
+func (ec *EntradasController) GetEntradas(c *gin.Context) {
+	entradas, err := ec.EntradasService.GetEntradas()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, entradas)
 }
+
 func (ec EntradasController) AddDish(c *gin.Context) {
 	// Implementar
 }
