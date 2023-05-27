@@ -17,21 +17,20 @@ func main() {
 		panic(err)
 	}
 	defer db.Close()
-
 	// Crear instancias de los componentes del backend
 	adminDB := database.NewAdminDatabase(db)
-	menuDB := database.NewMenuDatabase(db)
+	entradasDB := database.NewEntradasDatabase(db)
 	adminService := services.NewAdminService(adminDB)
-	menuService := services.NewMenuService(menuDB)
+	entradasService := services.NewEntradasService(entradasDB)
 	adminController := controllers.NewAdminController(adminService)
-	menuController := controllers.NewMenuController(menuService)
+	menuController := controllers.NewEntradasController(entradasService)
 
 	// Configurar el enrutador Gin
 	r := gin.Default()
 
 	// Configurar rutas para la administración
 	routes.SetupAdminRoutes(r, adminController)
-	routes.SetupMenuRoutes(r, menuController)
+	routes.SetupEntradasRoutes(r, menuController)
 
 	// Ejecutar el servidor
 	r.Run(":8080") // Cambia el número de puerto según tus necesidades

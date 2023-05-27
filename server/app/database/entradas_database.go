@@ -5,12 +5,12 @@ import (
 	// Importa otros paquetes necesarios
 )
 
-type MenuDatabase struct {
+type EntradasDatabase struct {
 	DB *sql.DB
 }
 
-func NewMenuDatabase(db *sql.DB) *MenuDatabase {
-	return &MenuDatabase{
+func NewEntradasDatabase(db *sql.DB) *EntradasDatabase {
+	return &EntradasDatabase{
 		DB: db,
 	}
 }
