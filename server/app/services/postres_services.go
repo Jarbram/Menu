@@ -18,3 +18,11 @@ func NewPostresService(postresDB *database.PostresDatabase) *PostresService {
 func (ps *PostresService) GetPostres() ([]models.Postres, error) {
 	return ps.PostresDB.GetPostres()
 }
+
+func (ps *PostresService) AddDish(postres *models.Postres) error {
+	return ps.PostresDB.AddDish(postres)
+}
+
+func (ps *PostresService) DeleteDish(id string) error {
+	return ps.PostresDB.DeleteDish(id)
+}

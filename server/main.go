@@ -6,6 +6,7 @@ import (
 	"menu/app/routes"
 	"menu/app/services"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -36,6 +37,7 @@ func main() {
 
 	// Configurar el enrutador Gin
 	r := gin.Default()
+	r.Use(cors.Default())
 
 	// Configurar rutas para la administración
 	routes.SetupAdminRoutes(r, adminController)

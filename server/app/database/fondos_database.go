@@ -35,3 +35,19 @@ func (fd FondosDatabase) GetFondos() ([]models.Fondos, error) {
 
 	return fondos, nil
 }
+
+func (fd FondosDatabase) AddDish(fondos *models.Fondos) error {
+	_, err := fd.DB.Exec("INSERT INTO fondos (nombre, precio, disponible, descripcion) VALUES (?, ?, ?, ?)", fondos.Nombre, fondos.Precio, fondos.Disponible, fondos.Descripcion)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (fd FondosDatabase) DeleteDish(id string) error {
+	_, err := fd.DB.Exec("DELETE FROM fondos WHERE id = ?", id)
+	if err != nil {
+		return err
+	}
+	return nil
+}

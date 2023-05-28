@@ -18,3 +18,11 @@ func NewFondosService(fondosDB *database.FondosDatabase) *FondosService {
 func (fs *FondosService) GetFondos() ([]models.Fondos, error) {
 	return fs.FondosDB.GetFondos()
 }
+
+func (fs *FondosService) AddDish(fondos *models.Fondos) error {
+	return fs.FondosDB.AddDish(fondos)
+}
+
+func (fs *FondosService) DeleteDish(id string) error {
+	return fs.FondosDB.DeleteDish(id)
+}

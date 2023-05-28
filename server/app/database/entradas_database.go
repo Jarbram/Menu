@@ -36,3 +36,19 @@ func (ed EntradasDatabase) GetEntradas() ([]models.Entradas, error) {
 
 	return entradas, nil
 }
+
+func (ed EntradasDatabase) AddDish(entrada *models.Entradas) error {
+	_, err := ed.DB.Exec("INSERT INTO entradas (nombre, precio, disponible, descripcion) VALUES (?, ?, ?, ?)", entrada.Nombre, entrada.Precio, entrada.Disponible, entrada.Descripcion)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (ed EntradasDatabase) DeleteDish(id string) error {
+	_, err := ed.DB.Exec("DELETE FROM entradas WHERE id = ?", id)
+	if err != nil {
+		return err
+	}
+	return nil
+}

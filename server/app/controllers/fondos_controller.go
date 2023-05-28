@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"menu/app/models"
 	"menu/app/services"
 	"net/http"
 
@@ -26,8 +27,24 @@ func (fc FondosController) GetFondos(c *gin.Context) {
 
 }
 func (fc FondosController) AddDish(c *gin.Context) {
-	// Implementar
+	var fondos models.Fondos
+	if err := c.ShouldBindJSON(&fondos); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	err := fc.FondosService.AddDish(&fondos)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusCreated, "Fondo añadido correctamente")
 }
 func (fc FondosController) DeleteDish(c *gin.Context) {
-	// Implementar
+	id := c.Param("id")
+	err := fc.FondosService.DeleteDish(id)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, "Fondo eliminado correctamente")
 }

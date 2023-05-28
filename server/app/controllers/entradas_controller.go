@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"menu/app/models"
 	"menu/app/services"
 	"net/http"
 
@@ -27,8 +28,24 @@ func (ec *EntradasController) GetEntradas(c *gin.Context) {
 }
 
 func (ec EntradasController) AddDish(c *gin.Context) {
-	// Implementar
+	var entradas models.Entradas
+	if err := c.ShouldBindJSON(&entradas); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	err := ec.EntradasService.AddDish(&entradas)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusCreated, "Entrada añadida correctamente")
 }
 func (ec EntradasController) DeleteDish(c *gin.Context) {
-	// Implementar
+	id := c.Param("id")
+	err := ec.EntradasService.DeleteDish(id)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, "Entrada eliminada correctamente")
 }

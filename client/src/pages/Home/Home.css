@@ -136,3 +136,12 @@
     }
    }
    
+    @media (max-width: 768px) {
+      .filter-container{
+        margin-right: 10%;
+      }
+      .food-container-list{
+        flex-direction: column;
+        gap: 40px;
+      }
+    }

@@ -35,3 +35,19 @@ func (bd BebidasDatabase) GetBebidas() ([]models.Bebidas, error) {
 
 	return bebidas, nil
 }
+
+func (bd BebidasDatabase) AddDish(bebidas *models.Bebidas) error {
+	_, err := bd.DB.Exec("INSERT INTO bebidas (nombre, precio, disponible, descripcion, tieneAlcohol) VALUES (?, ?, ?, ?, ?)", bebidas.Nombre, bebidas.Precio, bebidas.Disponible, bebidas.Descripcion, bebidas.TieneAlcohol)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (bd BebidasDatabase) DeleteDish(id string) error {
+	_, err := bd.DB.Exec("DELETE FROM bebidas WHERE id = ?", id)
+	if err != nil {
+		return err
+	}
+	return nil
+}

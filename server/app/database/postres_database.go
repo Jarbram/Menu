@@ -35,3 +35,19 @@ func (pd PostresDatabase) GetPostres() ([]models.Postres, error) {
 
 	return postres, nil
 }
+
+func (pd PostresDatabase) AddDish(postres *models.Postres) error {
+	_, err := pd.DB.Exec("INSERT INTO postres (nombre, precio, disponible, descripcion) VALUES (?, ?, ?, ?)", postres.Nombre, postres.Precio, postres.Disponible, postres.Descripcion)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (pd PostresDatabase) DeleteDish(id string) error {
+	_, err := pd.DB.Exec("DELETE FROM postres WHERE id = ?", id)
+	if err != nil {
+		return err
+	}
+	return nil
+}

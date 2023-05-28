@@ -18,3 +18,11 @@ func NewBebidasService(bebidasDB *database.BebidasDatabase) *BebidasService {
 func (bs *BebidasService) GetBebidas() ([]models.Bebidas, error) {
 	return bs.BebidasDB.GetBebidas()
 }
+
+func (bs *BebidasService) AddDish(bebidas *models.Bebidas) error {
+	return bs.BebidasDB.AddDish(bebidas)
+}
+
+func (bs *BebidasService) DeleteDish(id string) error {
+	return bs.BebidasDB.DeleteDish(id)
+}

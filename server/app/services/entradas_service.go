@@ -18,3 +18,11 @@ func NewEntradasService(entradasDB *database.EntradasDatabase) *EntradasService 
 func (es *EntradasService) GetEntradas() ([]models.Entradas, error) {
 	return es.EntradasDB.GetEntradas()
 }
+
+func (es *EntradasService) AddDish(entrada *models.Entradas) error {
+	return es.EntradasDB.AddDish(entrada)
+}
+
+func (es *EntradasService) DeleteDish(id string) error {
+	return es.EntradasDB.DeleteDish(id)
+}

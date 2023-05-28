@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"menu/app/models"
 	"menu/app/services"
 	"net/http"
 
@@ -25,8 +26,24 @@ func (bc *BebidasController) GetBebidas(c *gin.Context) {
 	c.JSON(http.StatusOK, bebidas)
 }
 func (bc BebidasController) AddDish(c *gin.Context) {
-	// Implementar
+	var bebidas models.Bebidas
+	if err := c.ShouldBindJSON(&bebidas); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	err := bc.BebidasService.AddDish(&bebidas)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusCreated, "Bebida añadida correctamente")
 }
 func (bc BebidasController) DeleteDish(c *gin.Context) {
-	// Implementar
+	id := c.Param("id")
+	err := bc.BebidasService.DeleteDish(id)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, "Bebida eliminada correctamente")
 }
