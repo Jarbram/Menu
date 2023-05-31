@@ -12,5 +12,6 @@ func SetupPostresRoutes(r *gin.Engine, postresController *controllers.PostresCon
 		postresRoutes.GET("/", postresController.GetPostres)
 		postresRoutes.POST("/add-dish", postresController.AddDish)
 		postresRoutes.DELETE("/delete-dish/:id", postresController.DeleteDish)
+		postresRoutes.PUT("/edit-dish/:id", postresController.UpdateDish)
 	}
 }

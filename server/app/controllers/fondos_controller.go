@@ -48,3 +48,17 @@ func (fc FondosController) DeleteDish(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, "Fondo eliminado correctamente")
 }
+
+func (fc FondosController) UpdateDish(c *gin.Context) {
+	id := c.Param("id")
+	var fondos models.Fondos
+	if err := c.ShouldBindJSON(&fondos); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	err := fc.FondosService.UpdateDish(id, &fondos)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+	}
+	c.JSON(http.StatusOK, "Fondo actualizado correctamente")
+}

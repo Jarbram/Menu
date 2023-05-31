@@ -51,3 +51,11 @@ func (fd FondosDatabase) DeleteDish(id string) error {
 	}
 	return nil
 }
+
+func (fd FondosDatabase) UpdateDish(id string, fondos *models.Fondos) error {
+	_, err := fd.DB.Exec("UPDATE fondos SET nombre = ?, precio = ?, disponible = ?, descripcion = ? WHERE id = ?", fondos.Nombre, fondos.Precio, fondos.Disponible, fondos.Descripcion, id)
+	if err != nil {
+		return err
+	}
+	return nil
+}

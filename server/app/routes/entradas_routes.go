@@ -12,6 +12,6 @@ func SetupEntradasRoutes(r *gin.Engine, entradasController *controllers.Entradas
 		entradasRoutes.GET("/", entradasController.GetEntradas)
 		entradasRoutes.POST("/add-dish", entradasController.AddDish)
 		entradasRoutes.DELETE("/delete-dish/:id", entradasController.DeleteDish)
-		// ... otras rutas relacionadas con el menú
+		entradasRoutes.PUT("/edit-dish/:id", entradasController.UpdateDish)
 	}
 }

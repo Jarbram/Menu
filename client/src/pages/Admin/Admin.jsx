@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Admin.css';
+import Table from '../../components/Tables/Tables';
 
 const Admin = () => {
   const [entradas, setEntradas] = useState([]);
@@ -122,216 +123,59 @@ const Admin = () => {
   return (
     <div className='admin'>
       <h1>Administrador</h1>
-      <div className='table-name'>
-        <h2>ENTRADAS</h2>
-        <button className='btn-add' onClick={() => handleAgregarPlato('entradas')}>Agregar</button>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Disponible</th>
-            <th>Descripción</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {entradas.map((entrada) => (
-            <tr key={entrada.id}>
-              <td>{entrada.id}</td>
-              <td>{entrada.nombre}</td>
-              <td>{entrada.precio}</td>
-              <td>{entrada.disponible ? 'Disponible' : 'No disponible'}</td>
-              <td>{entrada.descripcion}</td>
-              <td>
-                <button className='btn-edit'>Editar</button>
-                <button className='btn-delete' onClick={() => deleteDish(entrada.id, 'entradas')}>Eliminar</button>
-              </td>
-            </tr>
-          ))}
-          {showAgregarPlatoForm && (
-            <tr>
-              <td></td>
-              <td><input type="text" value={nuevoPlato.nombre} onChange={(e) => handleChangeNuevoPlato('nombre', e.target.value)} /></td>
-              <td><input type="int" value={nuevoPlato.precio} onChange={(e) => handleChangeNuevoPlato('precio', parseInt(e.target.value))} /></td>
-              <td>
-                <select value={nuevoPlato.disponible} onChange={(e) => handleChangeNuevoPlato('disponible', e.target.value)}>
-                  <option value={true}>Disponible</option>
-                  <option value={false}>No disponible</option>
-                </select>
-              </td>
-              <td><input type="text" value={nuevoPlato.descripcion} onChange={(e) => handleChangeNuevoPlato('descripcion', e.target.value)} /></td>
-              <td colSpan={2}>
-                <button onClick={() => agregarPlato('entradas')}>Agregar</button>
-                <button onClick={() => setShowAgregarPlatoForm(false)}>Cancelar</button>
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+
+      <Table
+      platos={entradas}
+      tipo='entradas'
+      handleAgregarPlato={handleAgregarPlato}
+      deleteDish={deleteDish}
+      showAgregarPlatoForm={showAgregarPlatoForm}
+      nuevoPlato={nuevoPlato}
+      handleChangeNuevoPlato={handleChangeNuevoPlato}
+      agregarPlato={agregarPlato}
+    />
 
       {/* Fondos */}
-      <div className='table-name'>
-        <h2>FONDOS</h2>
-        <button className='btn-add' onClick={() => handleAgregarPlato('fondos')}>Agregar</button>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Disponible</th>
-            <th>Descripción</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {fondos.map((fondo) => (
-            <tr key={fondo.id}>
-              <td>{fondo.id}</td>
-              <td>{fondo.nombre}</td>
-              <td>{fondo.precio}</td>
-              <td>{fondo.disponible ? 'Disponible' : 'No disponible'}</td>
-              <td>{fondo.descripcion}</td>
-              <td>
-                <button className='btn-edit'>Editar</button>
-                <button className='btn-delete' onClick={() => deleteDish(fondo.id, 'fondos')}>Eliminar</button>
-              </td>
-            </tr>
-          ))}
-          {showAgregarPlatoForm && (
-            <tr>
-              <td></td>
-              <td><input type="text" value={nuevoPlato.nombre} onChange={(e) => handleChangeNuevoPlato('nombre', e.target.value)} /></td>
-              <td><input type="int" value={nuevoPlato.precio} onChange={(e) => handleChangeNuevoPlato('precio', parseInt(e.target.value))} /></td>
-              <td>
-                <select value={nuevoPlato.disponible} onChange={(e) => handleChangeNuevoPlato('disponible', e.target.value)}>
-                  <option value={true}>Disponible</option>
-                  <option value={false}>No disponible</option>
-                </select>
-              </td>
-              <td><input type="text" value={nuevoPlato.descripcion} onChange={(e) => handleChangeNuevoPlato('descripcion', e.target.value)} /></td>
-              <td colSpan={2}>
-                <button onClick={() => agregarPlato('fondos')}>Agregar</button>
-                <button onClick={() => setShowAgregarPlatoForm(false)}>Cancelar</button>
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+      <Table
+      platos={fondos}
+      tipo='fondos'
+      handleAgregarPlato={handleAgregarPlato}
+      deleteDish={deleteDish}
+      showAgregarPlatoForm={showAgregarPlatoForm}
+      setShowAgregarPlatoForm={setShowAgregarPlatoForm}
+      nuevoPlato={nuevoPlato}
+      handleChangeNuevoPlato={handleChangeNuevoPlato}
+      agregarPlato={agregarPlato}
+    />
 
       {/* Postres */}
-      <div className='table-name'>
-        <h2>POSTRES</h2>
-        <button className='btn-add' onClick={() => handleAgregarPlato('postres')}>Agregar</button>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Disponible</th>
-            <th>Descripción</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {postres.map((postre) => (
-            <tr key={postre.id}>
-              <td>{postre.id}</td>
-              <td>{postre.nombre}</td>
-              <td>{postre.precio}</td>
-              <td>{postre.disponible ? 'Disponible' : 'No disponible'}</td>
-              <td>{postre.descripcion}</td>
-              <td>
-                <button className='btn-edit'>Editar</button>
-                <button className='btn-delete' onClick={() => deleteDish(postre.id, 'postres')}>Eliminar</button>
-              </td>
-            </tr>
-          ))}
-          {showAgregarPlatoForm && (
-            <tr>
-              <td></td>
-              <td><input type="text" value={nuevoPlato.nombre} onChange={(e) => handleChangeNuevoPlato('nombre', e.target.value)} /></td>
-              <td><input type="int" value={nuevoPlato.precio} onChange={(e) => handleChangeNuevoPlato('precio', parseInt(e.target.value))} /></td>
-              <td>
-                <select value={nuevoPlato.disponible} onChange={(e) => handleChangeNuevoPlato('disponible', e.target.value)}>
-                  <option value={true}>Disponible</option>
-                  <option value={false}>No disponible</option>
-                </select>
-              </td>
-              <td><input type="text" value={nuevoPlato.descripcion} onChange={(e) => handleChangeNuevoPlato('descripcion', e.target.value)} /></td>
-              <td colSpan={2}>
-                <button onClick={() => agregarPlato('postres')}>Agregar</button>
-                <button onClick={() => setShowAgregarPlatoForm(false)}>Cancelar</button>
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+      <Table
+      platos={postres}
+      tipo='postres'
+      handleAgregarPlato={handleAgregarPlato}
+      deleteDish={deleteDish}
+      showAgregarPlatoForm={showAgregarPlatoForm}
+      setShowAgregarPlatoForm={setShowAgregarPlatoForm}
+      nuevoPlato={nuevoPlato}
+      handleChangeNuevoPlato={handleChangeNuevoPlato}
+      agregarPlato={agregarPlato}
+    />
 
-      {/* Bebidas */}
-      <div className='table-name'>
-        <h2>BEBIDAS</h2>
-        <button className='btn-add' onClick={() => handleAgregarPlato('bebidas')}>Agregar</button>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Disponible</th>
-            <th>Descripción</th>
-            {showAgregarPlatoForm && <th>Tiene Alcohol</th>}
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {bebidas.map((bebida) => (
-            <tr key={bebida.id}>
-              <td>{bebida.id}</td>
-              <td>{bebida.nombre}</td>
-              <td>{bebida.precio}</td>
-              <td>{bebida.disponible ? 'Disponible' : 'No disponible'}</td>
-              <td>{bebida.descripcion}</td>
-              {showAgregarPlatoForm && <td>{bebida.tieneAlcohol ? 'Sí' : 'No'}</td>} 
-              <td>
-                <button className='btn-edit'>Editar</button>
-                <button className='btn-delete' onClick={() => deleteDish(bebida.id, 'bebidas')}>Eliminar</button>
-              </td>
-            </tr>
-          ))}
-          {showAgregarPlatoForm && (
-            <tr>
-              <td></td>
-              <td><input type="text" value={nuevoPlato.nombre} onChange={(e) => handleChangeNuevoPlato('nombre', e.target.value)} /></td>
-              <td><input type="int" value={nuevoPlato.precio} onChange={(e) => handleChangeNuevoPlato('precio', parseInt(e.target.value))} /></td>
-              <td>
-                <select value={nuevoPlato.disponible} onChange={(e) => handleChangeNuevoPlato('disponible', e.target.value)}>
-                  <option value={true}>Disponible</option>
-                  <option value={false}>No disponible</option>
-                </select>
-              </td>
-              <td><input type="text" value={nuevoPlato.descripcion} onChange={(e) => handleChangeNuevoPlato('descripcion', e.target.value)} /></td>
-              <td>
-              <label>
-              Tiene Alcohol:
-              <input type="checkbox" checked={nuevoPlato.tieneAlcohol} onChange={(e) => setNuevoPlato({ ...nuevoPlato, tieneAlcohol: e.target.checked })} />
-            </label>
-              </td>
-              <td colSpan={2}>
-                <button onClick={() => agregarPlato('bebidas')}>Agregar</button>
-                <button onClick={() => setShowAgregarPlatoForm(false)}>Cancelar</button>
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+    
+      {/* Bebidas */} 
+      <Table
+      platos={bebidas}
+      tipo='bebidas'
+      handleAgregarPlato={handleAgregarPlato}
+      deleteDish={deleteDish}
+      showAgregarPlatoForm={showAgregarPlatoForm}
+      setShowAgregarPlatoForm={setShowAgregarPlatoForm}
+      nuevoPlato={nuevoPlato}
+      handleChangeNuevoPlato={handleChangeNuevoPlato}
+      agregarPlato={agregarPlato}
+      showTieneAlcohol={true}
+    />
+
     </div>
   );
 };

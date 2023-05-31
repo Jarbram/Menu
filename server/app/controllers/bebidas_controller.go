@@ -47,3 +47,18 @@ func (bc BebidasController) DeleteDish(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, "Bebida eliminada correctamente")
 }
+
+func (bc BebidasController) UpdateDish(c *gin.Context) {
+	id := c.Param("id")
+	var bebidas models.Bebidas
+	if err := c.ShouldBindJSON(&bebidas); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	err := bc.BebidasService.UpdateDish(id, &bebidas)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, "Bebida actualizada correctamente")
+}

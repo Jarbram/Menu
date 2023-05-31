@@ -48,3 +48,18 @@ func (pc PostresController) DeleteDish(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, "Postre eliminado correctamente")
 }
+
+func (pc PostresController) UpdateDish(c *gin.Context) {
+	id := c.Param("id")
+	var postres models.Postres
+	if err := c.ShouldBindJSON(&postres); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	err := pc.PostresService.UpdateDish(id, &postres)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, "Postre actualizado correctamente")
+}

@@ -26,3 +26,7 @@ func (es *EntradasService) AddDish(entrada *models.Entradas) error {
 func (es *EntradasService) DeleteDish(id string) error {
 	return es.EntradasDB.DeleteDish(id)
 }
+
+func (es *EntradasService) UpdateDish(id string, entrada *models.Entradas) error {
+	return es.EntradasDB.UpdateDish(id, entrada)
+}

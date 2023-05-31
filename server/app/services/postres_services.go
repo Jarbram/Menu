@@ -26,3 +26,7 @@ func (ps *PostresService) AddDish(postres *models.Postres) error {
 func (ps *PostresService) DeleteDish(id string) error {
 	return ps.PostresDB.DeleteDish(id)
 }
+
+func (ps *PostresService) UpdateDish(id string, postres *models.Postres) error {
+	return ps.PostresDB.UpdateDish(id, postres)
+}

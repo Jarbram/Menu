@@ -51,3 +51,11 @@ func (bd BebidasDatabase) DeleteDish(id string) error {
 	}
 	return nil
 }
+
+func (bd BebidasDatabase) UpdateDish(id string, bebidas *models.Bebidas) error {
+	_, err := bd.DB.Exec("UPDATE bebidas SET nombre = ?, precio = ?, disponible = ?, descripcion = ?, tieneAlcohol = ? WHERE id = ?", bebidas.Nombre, bebidas.Precio, bebidas.Disponible, bebidas.Descripcion, bebidas.TieneAlcohol, id)
+	if err != nil {
+		return err
+	}
+	return nil
+}

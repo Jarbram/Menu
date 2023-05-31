@@ -52,3 +52,11 @@ func (ed EntradasDatabase) DeleteDish(id string) error {
 	}
 	return nil
 }
+
+func (ed EntradasDatabase) UpdateDish(id string, entrada *models.Entradas) error {
+	_, err := ed.DB.Exec("UPDATE entradas SET nombre = ?, precio = ?, disponible = ?, descripcion = ? WHERE id = ?", entrada.Nombre, entrada.Precio, entrada.Disponible, entrada.Descripcion, id)
+	if err != nil {
+		return err
+	}
+	return nil
+}

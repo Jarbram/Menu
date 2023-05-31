@@ -49,3 +49,17 @@ func (ec EntradasController) DeleteDish(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, "Entrada eliminada correctamente")
 }
+
+func (ec EntradasController) UpdateDish(c *gin.Context) {
+	id := c.Param("id")
+	var entradas models.Entradas
+	if err := c.ShouldBindJSON(&entradas); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	err := ec.EntradasService.UpdateDish(id, &entradas)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+	}
+	c.JSON(http.StatusOK, "Entrada actualizada correctamente")
+}

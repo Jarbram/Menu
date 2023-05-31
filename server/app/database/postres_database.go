@@ -51,3 +51,11 @@ func (pd PostresDatabase) DeleteDish(id string) error {
 	}
 	return nil
 }
+
+func (pd PostresDatabase) UpdateDish(id string, postres *models.Postres) error {
+	_, err := pd.DB.Exec("UPDATE postres SET nombre = ?, precio = ?, disponible = ?, descripcion = ? WHERE id = ?", postres.Nombre, postres.Precio, postres.Disponible, postres.Descripcion, id)
+	if err != nil {
+		return err
+	}
+	return nil
+}

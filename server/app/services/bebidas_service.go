@@ -26,3 +26,7 @@ func (bs *BebidasService) AddDish(bebidas *models.Bebidas) error {
 func (bs *BebidasService) DeleteDish(id string) error {
 	return bs.BebidasDB.DeleteDish(id)
 }
+
+func (bs *BebidasService) UpdateDish(id string, bebidas *models.Bebidas) error {
+	return bs.BebidasDB.UpdateDish(id, bebidas)
+}

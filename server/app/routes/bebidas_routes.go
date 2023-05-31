@@ -12,5 +12,6 @@ func SetupBebidasRoutes(r *gin.Engine, bebidasController *controllers.BebidasCon
 		bebidasRoutes.GET("/", bebidasController.GetBebidas)
 		bebidasRoutes.POST("/add-dish", bebidasController.AddDish)
 		bebidasRoutes.DELETE("/delete-dish/:id", bebidasController.DeleteDish)
+		bebidasRoutes.PUT("/edit-dish/:id", bebidasController.UpdateDish)
 	}
 }

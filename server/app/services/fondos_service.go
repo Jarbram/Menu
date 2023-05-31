@@ -26,3 +26,7 @@ func (fs *FondosService) AddDish(fondos *models.Fondos) error {
 func (fs *FondosService) DeleteDish(id string) error {
 	return fs.FondosDB.DeleteDish(id)
 }
+
+func (fs *FondosService) UpdateDish(id string, fondos *models.Fondos) error {
+	return fs.FondosDB.UpdateDish(id, fondos)
+}
