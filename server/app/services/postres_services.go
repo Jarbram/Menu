@@ -19,6 +19,10 @@ func (ps *PostresService) GetPostres() ([]models.Postres, error) {
 	return ps.PostresDB.GetPostres()
 }
 
+func (ps *PostresService) GetPostresComplete() ([]models.Postres, error) {
+	return ps.PostresDB.GetPostresComplete()
+}
+
 func (ps *PostresService) AddDish(postres *models.Postres) error {
 	return ps.PostresDB.AddDish(postres)
 }

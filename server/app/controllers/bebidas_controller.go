@@ -25,6 +25,16 @@ func (bc *BebidasController) GetBebidas(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, bebidas)
 }
+
+func (bc *BebidasController) GetBebidasComplete(c *gin.Context) {
+	bebidas, err := bc.BebidasService.GetBebidasComplete()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, bebidas)
+}
+
 func (bc BebidasController) AddDish(c *gin.Context) {
 	var bebidas models.Bebidas
 	if err := c.ShouldBindJSON(&bebidas); err != nil {

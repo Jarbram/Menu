@@ -19,6 +19,10 @@ func (es *EntradasService) GetEntradas() ([]models.Entradas, error) {
 	return es.EntradasDB.GetEntradas()
 }
 
+func (es *EntradasService) GetEntradasComplete() ([]models.Entradas, error) {
+	return es.EntradasDB.GetEntradasComplete()
+}
+
 func (es *EntradasService) AddDish(entrada *models.Entradas) error {
 	return es.EntradasDB.AddDish(entrada)
 }

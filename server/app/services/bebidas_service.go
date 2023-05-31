@@ -19,6 +19,10 @@ func (bs *BebidasService) GetBebidas() ([]models.Bebidas, error) {
 	return bs.BebidasDB.GetBebidas()
 }
 
+func (bs *BebidasService) GetBebidasComplete() ([]models.Bebidas, error) {
+	return bs.BebidasDB.GetBebidasComplete()
+}
+
 func (bs *BebidasService) AddDish(bebidas *models.Bebidas) error {
 	return bs.BebidasDB.AddDish(bebidas)
 }

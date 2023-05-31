@@ -19,6 +19,10 @@ func (fs *FondosService) GetFondos() ([]models.Fondos, error) {
 	return fs.FondosDB.GetFondos()
 }
 
+func (fs *FondosService) GetFondosComplete() ([]models.Fondos, error) {
+	return fs.FondosDB.GetFondosComplete()
+}
+
 func (fs *FondosService) AddDish(fondos *models.Fondos) error {
 	return fs.FondosDB.AddDish(fondos)
 }

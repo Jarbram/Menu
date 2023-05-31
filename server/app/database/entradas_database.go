@@ -37,6 +37,26 @@ func (ed EntradasDatabase) GetEntradas() ([]models.Entradas, error) {
 	return entradas, nil
 }
 
+func (ed EntradasDatabase) GetEntradasComplete() ([]models.Entradas, error) {
+	var entradas []models.Entradas
+	rows, err := ed.DB.Query("SELECT * FROM entradas")
+	if err != nil {
+		return entradas, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var entrada models.Entradas
+		err = rows.Scan(&entrada.ID, &entrada.Nombre, &entrada.Precio, &entrada.Disponible, &entrada.Descripcion)
+		if err != nil {
+			return entradas, err
+		}
+		entradas = append(entradas, entrada)
+	}
+
+	return entradas, nil
+}
+
 func (ed EntradasDatabase) AddDish(entrada *models.Entradas) error {
 	_, err := ed.DB.Exec("INSERT INTO entradas (nombre, precio, disponible, descripcion) VALUES (?, ?, ?, ?)", entrada.Nombre, entrada.Precio, entrada.Disponible, entrada.Descripcion)
 	if err != nil {

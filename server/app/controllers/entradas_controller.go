@@ -27,6 +27,15 @@ func (ec *EntradasController) GetEntradas(c *gin.Context) {
 	c.JSON(http.StatusOK, entradas)
 }
 
+func (ec *EntradasController) GetEntradasComplete(c *gin.Context) {
+	entradas, err := ec.EntradasService.GetEntradasComplete()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, entradas)
+}
+
 func (ec EntradasController) AddDish(c *gin.Context) {
 	var entradas models.Entradas
 	if err := c.ShouldBindJSON(&entradas); err != nil {

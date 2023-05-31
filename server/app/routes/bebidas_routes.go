@@ -10,6 +10,7 @@ func SetupBebidasRoutes(r *gin.Engine, bebidasController *controllers.BebidasCon
 	bebidasRoutes := r.Group("/bebidas")
 	{
 		bebidasRoutes.GET("/", bebidasController.GetBebidas)
+		bebidasRoutes.GET("/complete", bebidasController.GetBebidasComplete)
 		bebidasRoutes.POST("/add-dish", bebidasController.AddDish)
 		bebidasRoutes.DELETE("/delete-dish/:id", bebidasController.DeleteDish)
 		bebidasRoutes.PUT("/edit-dish/:id", bebidasController.UpdateDish)

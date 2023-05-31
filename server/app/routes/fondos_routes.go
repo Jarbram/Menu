@@ -10,6 +10,7 @@ func SetupFondosRoutes(r *gin.Engine, fondosController *controllers.FondosContro
 	fondosRoutes := r.Group("/fondos")
 	{
 		fondosRoutes.GET("/", fondosController.GetFondos)
+		fondosRoutes.GET("/complete", fondosController.GetFondosComplete)
 		fondosRoutes.POST("/add-dish", fondosController.AddDish)
 		fondosRoutes.DELETE("/delete-dish/:id", fondosController.DeleteDish)
 		fondosRoutes.PUT("/edit-dish/:id", fondosController.UpdateDish)

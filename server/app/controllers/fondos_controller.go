@@ -26,6 +26,16 @@ func (fc FondosController) GetFondos(c *gin.Context) {
 	c.JSON(http.StatusOK, fondos)
 
 }
+
+func (fc FondosController) GetFondosComplete(c *gin.Context) {
+	fondos, err := fc.FondosService.GetFondosComplete()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, fondos)
+}
+
 func (fc FondosController) AddDish(c *gin.Context) {
 	var fondos models.Fondos
 	if err := c.ShouldBindJSON(&fondos); err != nil {

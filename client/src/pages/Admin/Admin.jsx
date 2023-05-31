@@ -114,10 +114,10 @@ const Admin = () => {
   };
 
   useEffect(() => {
-    fetchData('http://localhost:8080/entradas/', setEntradas);
-    fetchData('http://localhost:8080/fondos/', setFondos);
-    fetchData('http://localhost:8080/postres/', setPostres);
-    fetchData('http://localhost:8080/bebidas/', setBebidas);
+    fetchData('http://localhost:8080/entradas/complete', setEntradas);
+    fetchData('http://localhost:8080/fondos/complete', setFondos);
+    fetchData('http://localhost:8080/postres/complete', setPostres);
+    fetchData('http://localhost:8080/bebidas/complete', setBebidas);
   }, []);
 
   return (
@@ -130,6 +130,7 @@ const Admin = () => {
       handleAgregarPlato={handleAgregarPlato}
       deleteDish={deleteDish}
       showAgregarPlatoForm={showAgregarPlatoForm}
+      setShowAgregarPlatoForm={setShowAgregarPlatoForm}
       nuevoPlato={nuevoPlato}
       handleChangeNuevoPlato={handleChangeNuevoPlato}
       agregarPlato={agregarPlato}
