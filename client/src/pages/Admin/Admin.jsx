@@ -15,6 +15,28 @@ const Admin = () => {
     descripcion: '',
     tieneAlcohol: false
   });
+  const [editMode, setEditMode] = useState(false);
+  const [editedPlato, setEditedPlato] = useState(null);
+  const handleEditPlato = (plato) => {
+    setEditMode(true);
+    setEditedPlato(plato);
+  };
+  const handleSaveEdit = (updatedPlato) => {
+    // Lógica para guardar los cambios del plato editado
+    // Actualizar el estado de los platos
+    setNuevoPlato((prevPlatos) =>
+      prevPlatos.map((plato) =>
+        plato.id === updatedPlato.id ? updatedPlato : plato
+      )
+    );
+    setEditMode(false);
+    setEditedPlato(null);
+  };
+
+  const handleCancelEdit = () => {
+    setEditMode(false);
+    setEditedPlato(null);
+  };
 
   const fetchData = async (url, setState) => {
     try {
@@ -134,6 +156,11 @@ const Admin = () => {
       nuevoPlato={nuevoPlato}
       handleChangeNuevoPlato={handleChangeNuevoPlato}
       agregarPlato={agregarPlato}
+      handleEditPlato={handleEditPlato}
+      handleSaveEdit={handleSaveEdit}
+      handleCancelEdit={handleCancelEdit}
+      editMode={editMode}
+      editedPlato={editedPlato}
     />
 
       {/* Fondos */}
@@ -147,6 +174,11 @@ const Admin = () => {
       nuevoPlato={nuevoPlato}
       handleChangeNuevoPlato={handleChangeNuevoPlato}
       agregarPlato={agregarPlato}
+      handleEditPlato={handleEditPlato}
+      handleSaveEdit={handleSaveEdit}
+      handleCancelEdit={handleCancelEdit}
+      editMode={editMode}
+      editedPlato={editedPlato}
     />
 
       {/* Postres */}
@@ -160,6 +192,11 @@ const Admin = () => {
       nuevoPlato={nuevoPlato}
       handleChangeNuevoPlato={handleChangeNuevoPlato}
       agregarPlato={agregarPlato}
+      handleEditPlato={handleEditPlato}
+      handleSaveEdit={handleSaveEdit}
+      handleCancelEdit={handleCancelEdit}
+      editMode={editMode}
+      editedPlato={editedPlato}
     />
 
     
@@ -175,6 +212,11 @@ const Admin = () => {
       handleChangeNuevoPlato={handleChangeNuevoPlato}
       agregarPlato={agregarPlato}
       showTieneAlcohol={true}
+      handleEditPlato={handleEditPlato}
+      handleSaveEdit={handleSaveEdit}
+      handleCancelEdit={handleCancelEdit}
+      editMode={editMode}
+      editedPlato={editedPlato}
     />
 
     </div>
