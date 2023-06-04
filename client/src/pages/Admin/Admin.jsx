@@ -8,34 +8,73 @@ const Admin = () => {
   const [postres, setPostres] = useState([]);
   const [bebidas, setBebidas] = useState([]);
   const [showAgregarPlatoForm, setShowAgregarPlatoForm] = useState(false);
+  const [tipoPlato, setTipoPlato] = useState('');
   const [nuevoPlato, setNuevoPlato] = useState({
     nombre: '',
-    precio: parseInt(''),
+    precio: '',
     disponible: true,
     descripcion: '',
     tieneAlcohol: false
   });
   const [editMode, setEditMode] = useState(false);
-  const [editedPlato, setEditedPlato] = useState(null);
-  const handleEditPlato = (plato) => {
+  const [editedPlato, setEditedPlato] = useState({
+    id: '',
+    nombre: '',
+    precio: '',
+    disponible: true,
+    descripcion: '',
+    tieneAlcohol: false
+  });
+
+  const handleEditPlato = (plato, tipo) => {
     setEditMode(true);
     setEditedPlato(plato);
+    setTipoPlato(tipo);
   };
-  const handleSaveEdit = (updatedPlato) => {
-    // Lógica para guardar los cambios del plato editado
-    // Actualizar el estado de los platos
-    setNuevoPlato((prevPlatos) =>
-      prevPlatos.map((plato) =>
-        plato.id === updatedPlato.id ? updatedPlato : plato
-      )
-    );
-    setEditMode(false);
-    setEditedPlato(null);
+
+  const handleSaveEdit = async (tipo) => {
+    try {
+      const response = await fetch(`http://localhost:8080/${tipo}/edit-dish/${editedPlato.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(editedPlato)
+        
+      });
+console.log(editedPlato)
+      if (response.ok) {
+        // Actualiza la lista de platos después de guardar los cambios
+        fetchData(`http://localhost:8080/${tipo}/complete`, setStateByTipo(tipo));
+
+        // Restablece el modo de edición y el plato editado
+        setEditMode(false);
+        setEditedPlato({
+          id: '',
+          nombre: '',
+          precio: '',
+          disponible: true,
+          descripcion: '',
+          tieneAlcohol: false
+        });
+      } else {
+        console.error('Error al guardar los cambios del plato');
+      }
+    } catch (error) {
+      console.error('Error al realizar la solicitud PUT:', error);
+    }
   };
 
   const handleCancelEdit = () => {
     setEditMode(false);
-    setEditedPlato(null);
+    setEditedPlato({
+      id: '',
+      nombre: '',
+      precio: '',
+      disponible: true,
+      descripcion: '',
+      tieneAlcohol: false
+    });
   };
 
   const fetchData = async (url, setState) => {
@@ -61,7 +100,6 @@ const Admin = () => {
         },
         body: JSON.stringify(nuevoPlato)
       });
-      console.log(nuevoPlato)
 
       if (response.ok) {
         // Actualiza la lista de platos después de agregar uno nuevo
@@ -72,7 +110,8 @@ const Admin = () => {
           nombre: '',
           precio: '',
           disponible: true,
-          descripcion: ''
+          descripcion: '',
+          tieneAlcohol: false
         });
         setShowAgregarPlatoForm(false);
       } else {
@@ -98,14 +137,16 @@ const Admin = () => {
     }
   };
 
-  const handleAgregarPlato = (tipoPlato) => {
+  const handleAgregarPlato = (tipo) => {
     setNuevoPlato({
       nombre: '',
       precio: '',
       disponible: true,
-      descripcion: ''
+      descripcion: '',
+      tieneAlcohol: false
     });
     setShowAgregarPlatoForm(true);
+    setTipoPlato(tipo);
   };
 
   const handleChangeNuevoPlato = (campo, valor) => {
@@ -115,7 +156,14 @@ const Admin = () => {
     }));
   };
 
-  const deleteDish = async (id, tipo) => {  
+  const handleChangeEditedPlato = (campo, valor) => {
+    setEditedPlato((prevState) => ({
+      ...prevState,
+      [campo]: valor
+    }));
+  };
+
+  const deleteDish = async (id, tipo) => {
     try {
       const response = await fetch(`http://localhost:8080/${tipo}/delete-dish/${id}`, {
         method: 'DELETE',
@@ -147,21 +195,23 @@ const Admin = () => {
       <h1>Administrador</h1>
 
       <Table
-      platos={entradas}
-      tipo='entradas'
-      handleAgregarPlato={handleAgregarPlato}
-      deleteDish={deleteDish}
-      showAgregarPlatoForm={showAgregarPlatoForm}
-      setShowAgregarPlatoForm={setShowAgregarPlatoForm}
-      nuevoPlato={nuevoPlato}
-      handleChangeNuevoPlato={handleChangeNuevoPlato}
-      agregarPlato={agregarPlato}
-      handleEditPlato={handleEditPlato}
-      handleSaveEdit={handleSaveEdit}
-      handleCancelEdit={handleCancelEdit}
-      editMode={editMode}
-      editedPlato={editedPlato}
-    />
+        platos={entradas}
+        tipo='entradas'
+        handleAgregarPlato={handleAgregarPlato}
+        deleteDish={deleteDish}
+        showAgregarPlatoForm={showAgregarPlatoForm}
+        setShowAgregarPlatoForm={setShowAgregarPlatoForm}
+        tipoPlato={tipoPlato}
+        nuevoPlato={nuevoPlato}
+        handleChangeNuevoPlato={handleChangeNuevoPlato}
+        agregarPlato={agregarPlato}
+        handleEditPlato={handleEditPlato}
+        handleSaveEdit={handleSaveEdit}
+        handleCancelEdit={handleCancelEdit}
+        editMode={editMode}
+        editedPlato={editedPlato}
+        handleChangeEditedPlato={handleChangeEditedPlato}
+      />
 
       {/* Fondos */}
       <Table
@@ -171,6 +221,7 @@ const Admin = () => {
       deleteDish={deleteDish}
       showAgregarPlatoForm={showAgregarPlatoForm}
       setShowAgregarPlatoForm={setShowAgregarPlatoForm}
+      tipoPlato={tipoPlato}
       nuevoPlato={nuevoPlato}
       handleChangeNuevoPlato={handleChangeNuevoPlato}
       agregarPlato={agregarPlato}
@@ -179,6 +230,7 @@ const Admin = () => {
       handleCancelEdit={handleCancelEdit}
       editMode={editMode}
       editedPlato={editedPlato}
+      handleChangeEditedPlato={handleChangeEditedPlato}
     />
 
       {/* Postres */}
@@ -188,6 +240,7 @@ const Admin = () => {
       handleAgregarPlato={handleAgregarPlato}
       deleteDish={deleteDish}
       showAgregarPlatoForm={showAgregarPlatoForm}
+      tipoPlato={tipoPlato}
       setShowAgregarPlatoForm={setShowAgregarPlatoForm}
       nuevoPlato={nuevoPlato}
       handleChangeNuevoPlato={handleChangeNuevoPlato}
@@ -197,6 +250,7 @@ const Admin = () => {
       handleCancelEdit={handleCancelEdit}
       editMode={editMode}
       editedPlato={editedPlato}
+      handleChangeEditedPlato={handleChangeEditedPlato}
     />
 
     
@@ -208,6 +262,7 @@ const Admin = () => {
       deleteDish={deleteDish}
       showAgregarPlatoForm={showAgregarPlatoForm}
       setShowAgregarPlatoForm={setShowAgregarPlatoForm}
+      tipoPlato={tipoPlato}
       nuevoPlato={nuevoPlato}
       handleChangeNuevoPlato={handleChangeNuevoPlato}
       agregarPlato={agregarPlato}
@@ -217,8 +272,8 @@ const Admin = () => {
       handleCancelEdit={handleCancelEdit}
       editMode={editMode}
       editedPlato={editedPlato}
+      handleChangeEditedPlato={handleChangeEditedPlato}
     />
-
     </div>
   );
 };

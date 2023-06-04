@@ -5,7 +5,7 @@
     flex-direction: column;
     position: relative;
     top: -2px;
-    height: 370px;
+    height: 400px;
     background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1831 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="rgba(77, 179, 156, 1)" d="M 0 0 C 3.2 0 -7.2 368 -4 368 L -4 368 L -4 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(77, 179, 156, 1)" d="M -5 368 C 187 368 43 273 235 273 L 235 273 L 235 0 L -5 0 Z" stroke-width="0"></path> <path fill="rgba(77, 179, 156, 1)" d="M 234 273 C 689.2 273 347.79999999999995 -95 803 -95 L 803 -95 L 803 0 L 234 0 Z" stroke-width="0"></path><path fill="rgba(77, 179, 156, 1)" d="M 802 -95 C 1258 -95 916 105 1372 105 L 1372 105 L 1372 0 L 802 0 Z" stroke-width="0"></path><path fill="rgba(77, 179, 156, 1)" d="M 1371 105 C 1739.8 105 1463.2 267 1832 267 L 1832 267 L 1832 0 L 1371 0 Z" stroke-width="0"></path><path fill="rgba(77, 179, 156, 1)" d="M 1831 267 C 1831 267 1831 0 1831 0 L 1831 0 L 1831 0 L 1831 0 Z" stroke-width="0"></path></svg>');
     background-size: cover;
     background-repeat: no-repeat;
@@ -143,5 +143,8 @@
       .food-container-list{
         flex-direction: column;
         gap: 40px;
+      }
+      .food-container-list{
+        width: 380px;
       }
     }

@@ -3,6 +3,7 @@ import React from 'react';
 const Table = ({
   platos,
   tipo,
+  tipoPlato,
   handleAgregarPlato,
   deleteDish,
   showAgregarPlatoForm,
@@ -16,6 +17,7 @@ const Table = ({
   handleCancelEdit,
   editMode,
   editedPlato,
+  handleChangeEditedPlato,
 }) => {
   return (
     <>
@@ -33,7 +35,7 @@ const Table = ({
             <th>Precio</th>
             <th>Disponible</th>
             <th>Descripción</th>
-            {showTieneAlcohol && <th>Tiene Alcohol</th>}
+            {showTieneAlcohol && tipo === 'bebidas' && <th>Tiene Alcohol</th>}
             <th>Acciones</th>
           </tr>
         </thead>
@@ -45,9 +47,9 @@ const Table = ({
               <td>{plato.precio}</td>
               <td>{plato.disponible ? 'Disponible' : 'No disponible'}</td>
               <td>{plato.descripcion}</td>
-              {showTieneAlcohol && <td>{plato.tieneAlcohol ? 'Sí' : 'No'}</td>}
+              {showTieneAlcohol && tipo === 'bebidas' && <td>{plato.tieneAlcohol ? 'Sí' : 'No'}</td>}
               <td>
-                <button className='btn-edit' onClick={() => handleEditPlato(plato)}>Editar</button>
+                <button className='btn-edit' onClick={() => handleEditPlato(plato, tipo)}>Editar</button>
                 <button className='btn-delete' onClick={() => deleteDish(plato.id, tipo)}>Eliminar</button>
               </td>
             </tr>
@@ -58,7 +60,7 @@ const Table = ({
       {showAgregarPlatoForm && (
         <div className="modal">
           <div className="modal-content">
-            <h3>Agregar Nuevo Plato</h3>
+            <h3>Agregar Nuevo Plato a {tipoPlato}</h3>
             <div className="form">
               <label>Nombre:</label>
               <input
@@ -80,7 +82,7 @@ const Table = ({
               <select
                 value={nuevoPlato.disponible}
                 onChange={(e) =>
-                  handleChangeNuevoPlato('disponible', e.target.value)
+                  handleChangeEditedPlato('disponible' ,e.target.value === 'true')
                 }
               >
                 <option value={true}>Disponible</option>
@@ -94,7 +96,7 @@ const Table = ({
                   handleChangeNuevoPlato('descripcion', e.target.value)
                 }
               />
-              {showTieneAlcohol && (
+              {showTieneAlcohol && tipoPlato === 'bebidas' && (
                 <label>
                   Tiene Alcohol:
                   <input
@@ -110,7 +112,7 @@ const Table = ({
                 </label>
               )}
               <div className="button-group">
-                <button onClick={() => agregarPlato(tipo)}>Agregar</button>
+                <button onClick={() => agregarPlato(tipoPlato)}>Agregar</button>
                 <button onClick={() => setShowAgregarPlatoForm(false)}>Cancelar</button>
               </div>
             </div>
@@ -118,7 +120,7 @@ const Table = ({
         </div>
       )}
 
-      {editMode && tipo ==='bebidas' && (
+      {editMode && (
         <div className="modal">
           <div className="modal-content">
             <h3>Editar Plato</h3>
@@ -130,7 +132,7 @@ const Table = ({
                 type='text'
                 value={editedPlato.nombre}
                 onChange={(e) =>
-                  handleSaveEdit({...editedPlato, nombre: e.target.value})
+                  handleChangeEditedPlato('nombre' ,e.target.value)
                 }
               />
               <label>Precio:</label>
@@ -138,14 +140,14 @@ const Table = ({
                 type='number'
                 value={editedPlato.precio}
                 onChange={(e) =>
-                  handleSaveEdit({...editedPlato, precio: parseInt(e.target.value)})
+                  handleChangeEditedPlato( 'precio' ,parseInt(e.target.value))
                 }
               />
               <label>Disponible:</label>
               <select
                 value={editedPlato.disponible}
                 onChange={(e) =>
-                  handleSaveEdit({...editedPlato, disponible: e.target.value === 'true'})
+                  handleChangeEditedPlato('disponible' ,e.target.value === 'true')
                 }
               >
                 <option value={true}>Disponible</option>
@@ -155,23 +157,25 @@ const Table = ({
               <input
                 type='text'
                 value={editedPlato.descripcion}
-                onChange={(e) =>
-                  handleSaveEdit({...editedPlato, descripcion: e.target.value})
+                onChange={(e) => 
+                  handleChangeEditedPlato('descripcion' ,e.target.value)
                 }
               />
-              {showTieneAlcohol && (
-                <label>
-                  Tiene Alcohol:
-                  <input
-                    type='checkbox'
-                    checked={editedPlato.tieneAlcohol}
-                    onChange={(e) =>
-                      handleSaveEdit({...editedPlato, tieneAlcohol: e.target.checked})
-                    }
-                  />
-                </label>
+              {tipoPlato === 'bebidas' && (
+                <>
+                  <label>Tiene alcohol:</label>
+                  <select
+                    value={editedPlato.tieneAlcohol}
+                    onChange={(e) => handleChangeEditedPlato('tieneAlcohol', e.target.value === 'true')}
+                  >
+                    <option value='true'>Sí</option>
+                    <option value='false'>No</option>
+                  </select>
+                </>
               )}
+              
               <div className="button-group">
+                <button onClick={() => handleSaveEdit(tipoPlato)}>Guardar</button>
                 <button onClick={() => handleCancelEdit()}>Cancelar</button>
               </div>
             </div>
