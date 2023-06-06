@@ -1,6 +1,9 @@
 package services
 
-import "menu/app/database"
+import (
+	"fmt"
+	"menu/app/database"
+)
 
 type AdminService struct {
 	AdminDB *database.AdminDatabase
@@ -12,5 +15,12 @@ func NewAdminService(adminDB *database.AdminDatabase) *AdminService {
 	}
 }
 
-// Funciones relacionadas con la lógica de negocio para administradores
-// Ejemplo: autenticación, agregar nuevo administrador, etc.
+func (as AdminService) Login(username, password string) error {
+	err := as.AdminDB.Login(username, password)
+	if err != nil {
+		fmt.Println("Login error:", err)
+	} else {
+		fmt.Println("Login successful")
+	}
+	return err
+}

@@ -105,6 +105,12 @@
   max-width: 500px;
 }
 
+.logout{
+  padding: 10px;
+}
+.logout:hover{
+  background-color: rgb(244, 55, 55);
+}
 
   .btn-delete{
     background-color: rgb(244, 55, 55);

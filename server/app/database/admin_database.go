@@ -2,6 +2,8 @@ package database
 
 import (
 	"database/sql"
+	"errors"
+	"fmt"
 	// Importa otros paquetes necesarios
 )
 
@@ -15,5 +17,19 @@ func NewAdminDatabase(db *sql.DB) *AdminDatabase {
 	}
 }
 
-// Funciones para interactuar con la tabla "admin" en la base de datos
-// Ejemplo: crear, obtener, eliminar registros de administrador
+var ErrInvalidCredentials = errors.New("invalid credentials")
+
+func (ad AdminDatabase) Login(username, password string) error {
+	var result string
+	err := ad.DB.QueryRow("SELECT username FROM admin WHERE username = ? AND password = ?", username, password).Scan(&result)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			fmt.Println("Invalid credentials")
+			return ErrInvalidCredentials
+		}
+		fmt.Println("Database error:", err)
+		return err
+	}
+	fmt.Println("Login successful")
+	return nil
+}

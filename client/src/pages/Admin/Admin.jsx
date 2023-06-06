@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './Admin.css';
 import Table from '../../components/Tables/Tables';
+import { AuthContext } from '../../components/AuthContext/AuthContext';
 
 const Admin = () => {
   const [entradas, setEntradas] = useState([]);
@@ -25,6 +26,7 @@ const Admin = () => {
     descripcion: '',
     tieneAlcohol: false
   });
+  const {logout} = useContext(AuthContext);
 
   const handleEditPlato = (plato, tipo) => {
     setEditMode(true);
@@ -193,7 +195,7 @@ console.log(editedPlato)
   return (
     <div className='admin'>
       <h1>Administrador</h1>
-
+      <button className='logout' onClick={logout}>Cerrar sesión</button>
       <Table
         platos={entradas}
         tipo='entradas'
