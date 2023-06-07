@@ -5,7 +5,6 @@ export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
 const [userLoggedIn, setUserLoggedIn] = useState(false);
-const navigate = useNavigate();
 
 const login = async ({ password, username }) => {
     try {
@@ -30,7 +29,6 @@ const login = async ({ password, username }) => {
 
 const logout = () => {
     setUserLoggedIn(false);
-    navigate('/login');
 };
 
 return (
