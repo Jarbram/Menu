@@ -1,150 +1,158 @@
-.background-wave{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.background-wave {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  top: -2px;
+  height: 400px;
+  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1831 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="rgba(77, 179, 156, 1)" d="M 0 0 C 3.2 0 -7.2 368 -4 368 L -4 368 L -4 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(77, 179, 156, 1)" d="M -5 368 C 187 368 43 273 235 273 L 235 273 L 235 0 L -5 0 Z" stroke-width="0"></path> <path fill="rgba(77, 179, 156, 1)" d="M 234 273 C 689.2 273 347.79999999999995 -95 803 -95 L 803 -95 L 803 0 L 234 0 Z" stroke-width="0"></path><path fill="rgba(77, 179, 156, 1)" d="M 802 -95 C 1258 -95 916 105 1372 105 L 1372 105 L 1372 0 L 802 0 Z" stroke-width="0"></path><path fill="rgba(77, 179, 156, 1)" d="M 1371 105 C 1739.8 105 1463.2 267 1832 267 L 1832 267 L 1832 0 L 1371 0 Z" stroke-width="0"></path><path fill="rgba(77, 179, 156, 1)" d="M 1831 267 C 1831 267 1831 0 1831 0 L 1831 0 L 1831 0 L 1831 0 Z" stroke-width="0"></path></svg>');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.title {
+  font-size: 50px;
+  font-weight: 700;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-top: 3px solid var(--color-letter);
+  border-bottom: 3px solid var(--color-letter);
+  color: var(--color-letter);
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 30%;
+  width: 100%;
+}
+
+.filter-container select {
+  padding: 0.5rem 1rem;
+  background-color: var(--color-bg);
+  color: var(--color-letter);
+  border: 1px solid #333;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.filter-container select:hover {
+  box-shadow: 0 0 5px var(--color-letter);
+}
+
+.filter-container option {
+  background-color: #e8e8e8;
+  color: #333;
+}
+
+.food-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 140px;
+}
+
+.food-container-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 200px;
+  margin-top: 40px;
+}
+
+.food-title {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-letter);
+}
+
+.food-title h3 {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.description {
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: var(--color-letter);
+  margin-bottom: 10px;
+}
+
+.food-container-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+
+.food-container-image img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.filter-alcoholic {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 300px;
+}
+
+.filter-alcoholic button {
+  padding: 0.5rem 1rem;
+  background-color: var(--color-bg);
+  color: var(--color-letter);
+  border: 1px solid #333;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.filter-alcoholic button:hover {
+  box-shadow: 0 0 5px var(--color-letter);
+}
+
+.background-wave-footer {
+  display: block;
+  position: relative;
+  top: -2px;
+  height: 500px;
+  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1831 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="rgba(77, 179, 156, 1)" d="M 0 0 C 5.6000000000000005 0 -12.600000000000001 388 -7 388 L -7 388 L -7 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(77, 179, 156, 1)" d="M -8 388 C 316.8 388 73.19999999999999 173 398 173 L 398 173 L 398 0 L -8 0 Z" stroke-width="0"></path> <path fill="rgba(77, 179, 156, 1)" d="M 397 173 C 775.4000000000001 173 491.59999999999997 -36 870 -36 L 870 -36 L 870 0 L 397 0 Z" stroke-width="0"></path><path fill="rgba(77, 179, 156, 1)" d="M 869 -36 C 1405 -36 1003 202 1539 202 L 1539 202 L 1539 0 L 869 0 Z" stroke-width="0"></path><path fill="rgba(77, 179, 156, 1)" d="M 1538 202 C 1773.2 202 1596.8 267 1832 267 L 1832 267 L 1832 0 L 1538 0 Z" stroke-width="0"></path><path fill="rgba(77, 179, 156, 1)" d="M 1831 267 C 1831 267 1831 0 1831 0 L 1831 0 L 1831 0 L 1831 0 Z" stroke-width="0"></path></svg>');
+  background-size: cover;
+  background-repeat: no-repeat;
+  transform: rotate(180deg);
+  margin-top: -250px;
+}
+
+@media (max-width: 1814px) {
+  .background-wave {
+    background-size: contain;
+  }
+  .background-wave-footer {
+    background-size: contain;
+  }
+}
+
+@media (max-width: 768px) {
+  .filter-container {
+    margin-right: 10%;
+  }
+  .food-container-list {
     flex-direction: column;
-    position: relative;
-    top: -2px;
-    height: 400px;
-    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1831 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="rgba(77, 179, 156, 1)" d="M 0 0 C 3.2 0 -7.2 368 -4 368 L -4 368 L -4 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(77, 179, 156, 1)" d="M -5 368 C 187 368 43 273 235 273 L 235 273 L 235 0 L -5 0 Z" stroke-width="0"></path> <path fill="rgba(77, 179, 156, 1)" d="M 234 273 C 689.2 273 347.79999999999995 -95 803 -95 L 803 -95 L 803 0 L 234 0 Z" stroke-width="0"></path><path fill="rgba(77, 179, 156, 1)" d="M 802 -95 C 1258 -95 916 105 1372 105 L 1372 105 L 1372 0 L 802 0 Z" stroke-width="0"></path><path fill="rgba(77, 179, 156, 1)" d="M 1371 105 C 1739.8 105 1463.2 267 1832 267 L 1832 267 L 1832 0 L 1371 0 Z" stroke-width="0"></path><path fill="rgba(77, 179, 156, 1)" d="M 1831 267 C 1831 267 1831 0 1831 0 L 1831 0 L 1831 0 L 1831 0 Z" stroke-width="0"></path></svg>');
-    background-size: cover;
-    background-repeat: no-repeat;
-   }
-
-   .title{
-    font-size:50px;
-    font-weight: 700;
-    letter-spacing: 8px;
-    text-transform: uppercase;
-    padding: 10px 20px;
-    border-top: 3px solid var(--color-letter);
-    border-bottom: 3px solid var(--color-letter);
-    color: var(--color-letter);
-    margin-bottom: 40px;
-    text-align: center;
-   }
-
-   .filter-container {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-right: 30%;
-    width: 100%;
+    gap: 40px;
   }
-  
-  .filter-container select {
-    padding: 0.5rem 1rem;
-    background-color:var(--color-bg);
-    color:var(--color-letter);
-    border:1px solid #333;
-    cursor: pointer;
-    font-size: 16px;
+  .food-container-list {
+    width: 350px;
   }
-
-  .filter-container select:hover {
-    box-shadow: 0 0 5px var(--color-letter);
-  }
-
-  .filter-container option {
-    background-color: #e8e8e8;
-    color: #333;
-  }
-  
-
-   .food-container{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-bottom: 140px;
-   }
-   .food-container-list{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 200px;
-    margin-top: 40px;
-   }
-   .food-title{
-    display: flex;
-    justify-content: space-between;
-    color: var(--color-letter);
-   }
-   .food-title h3{
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    text-align: center;
-   }
-   .description{
-    font-size: 15px;
-    font-weight: 400;
-    letter-spacing: 1px;
-    color: var(--color-letter);
-    margin-bottom: 10px;
-   }
-
-   .food-container-image{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-   }
-
-   .filter-alcoholic {
-    margin-top: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 500px;
-  }
-  .filter-alcoholic button {
-    padding: 0.5rem 1rem;
-    background-color:var(--color-bg);
-    color:var(--color-letter);
-    border:1px solid #333;
-    cursor: pointer;
-    font-size: 16px;
-  }
-
-  .filter-alcoholic button:hover {
-    box-shadow: 0 0 5px var(--color-letter);
-  }
-
-
-  
-   .background-wave-footer {
-    display: block;
-    position: relative;
-    top: -2px;
-    height: 500px;
-    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1831 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="rgba(77, 179, 156, 1)" d="M 0 0 C 5.6000000000000005 0 -12.600000000000001 388 -7 388 L -7 388 L -7 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(77, 179, 156, 1)" d="M -8 388 C 316.8 388 73.19999999999999 173 398 173 L 398 173 L 398 0 L -8 0 Z" stroke-width="0"></path> <path fill="rgba(77, 179, 156, 1)" d="M 397 173 C 775.4000000000001 173 491.59999999999997 -36 870 -36 L 870 -36 L 870 0 L 397 0 Z" stroke-width="0"></path><path fill="rgba(77, 179, 156, 1)" d="M 869 -36 C 1405 -36 1003 202 1539 202 L 1539 202 L 1539 0 L 869 0 Z" stroke-width="0"></path><path fill="rgba(77, 179, 156, 1)" d="M 1538 202 C 1773.2 202 1596.8 267 1832 267 L 1832 267 L 1832 0 L 1538 0 Z" stroke-width="0"></path><path fill="rgba(77, 179, 156, 1)" d="M 1831 267 C 1831 267 1831 0 1831 0 L 1831 0 L 1831 0 L 1831 0 Z" stroke-width="0"></path></svg>');
-    background-size: cover;
-    background-repeat: no-repeat;
-    transform: rotate(180deg);
-    margin-top: -250px;
-   }
-   
-   @media (max-width:1814px) {
-    .background-wave {
-      background-size: contain;
-    }
-    .background-wave-footer {
-      background-size: contain;
-    }
-   }
-   
-    @media (max-width: 768px) {
-      .filter-container{
-        margin-right: 10%;
-      }
-      .food-container-list{
-        flex-direction: column;
-        gap: 40px;
-      }
-      .food-container-list{
-        width: 380px;
-      }
-    }
+}

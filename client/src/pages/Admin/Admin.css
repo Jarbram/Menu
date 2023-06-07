@@ -1,52 +1,54 @@
 .admin {
-    margin: 20px;
-    background-color: var(--color-bg);
-    color: var(--color-letter);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-
-.table-name{
-    display: flex ;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+  margin: 20px;
+  background-color: var(--color-bg);
+  color: var(--color-letter);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
-  
-  h1 {
-    text-align: center;
-  }
-  
-  h2 {
-    margin-top: 30px;
-    margin-bottom: 10px;
-  }
-  
-  table {
-    background-color: var(--color-white);
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  th, td {
-    padding: 8px;
-    text-align: left;
-    border: 1px solid #717171;
-    border-right: 1px solid #717171;
-  }
 
-  button{
-    background-color: var(--color-bg);
-    color: var(--color-letter);
-    border: 1px solid var(--color-letter);
-    border-radius: 5px;
-    padding: 5px;
-    margin: 5px;
-    cursor: pointer;
-  }
+.table-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+}
+
+h2 {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+table {
+  background-color: var(--color-white);
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #717171;
+  border-right: 1px solid #717171;
+}
+
+button {
+  background-color: var(--color-bg);
+  color: var(--color-letter);
+  border: 1px solid var(--color-letter);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+}
+
 /* Estilos generales del modal */
 .modal {
   position: fixed;
@@ -105,26 +107,45 @@
   max-width: 500px;
 }
 
-.logout{
+.logout {
   padding: 10px;
 }
-.logout:hover{
+
+.logout:hover {
   background-color: rgb(244, 55, 55);
 }
 
-  .btn-delete{
-    background-color: rgb(244, 55, 55);
-  }
-  .btn-edit{
-    background-color: rgb(55, 143, 244);
-  }
-  .btn-add{
-    background-color: rgb(55, 244, 121);
+.btn-delete {
+  background-color: rgb(244, 55, 55);
+}
+
+.btn-edit {
+  background-color: rgb(55, 143, 244);
+}
+
+.btn-add {
+  background-color: rgb(55, 244, 121);
+}
+
+@media (max-width: 600px) {
+  th,
+  td {
+    font-size: 12px;
+    padding: 5px;
   }
   
-  @media (max-width: 600px) {
-    th, td {
-      font-size: 12px;
-    }
+
+  .table-name h2 {
+    margin-top: 10px;
   }
-  
+
+  button {
+    font-size: 12px;
+    padding: 4px;
+    margin: 2px;
+  }
+
+  .modal-content {
+    max-width: 300px;
+  }
+}
